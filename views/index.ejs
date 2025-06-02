@@ -1,32 +1,106 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-  <meta charset="UTF-8" />
-  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
-  <title>404Fixers - IT Support</title>
-  <link rel="icon" href="/favicon.ico" type="image/x-icon">
-  <link rel="shortcut icon" href="/favicon.ico" type="image/x-icon">
-  <link rel="stylesheet" href="/css/styles.css" />
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>ShoreSquad - Rally Your Beach Cleanup Crew</title>
+    <link rel="icon" href="/favicon.ico" type="image/x-icon">
+    <link rel="stylesheet" href="/css/styles.css">
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;600&display=swap" rel="stylesheet">
+    <!-- Weather and Map APIs -->
+    <script src="https://maps.googleapis.com/maps/api/js?key=YOUR_API_KEY" defer></script>
 </head>
 <body>
-  <header class="hero">
-    <div class="hero-content">
-      <h1>🧠 404Fixers</h1>
-      <p>Where broken tech meets smart solutions.</p>
-    </div>
-  </header>
+    <nav class="main-nav">
+        <div class="nav-content">
+            <div class="logo">🌊 ShoreSquad</div>
+            <ul class="nav-links">
+                <li><a href="#map">Find Cleanup</a></li>
+                <li><a href="#weather">Weather</a></li>
+                <li><a href="#community">Community</a></li>
+                <li><button class="join-btn">Join Squad</button></li>
+            </ul>
+        </div>
+    </nav>
 
-  <main class="main-content">
-    <section class="card">
-      <h2>💬 Talk to our AI Agent</h2>
-      <div class="iframe-container">
-        <iframe src="https://your-chatbot-url.com" width="100%" height="500px" frameborder="0" allowfullscreen></iframe>
-      </div>
-    </section>
-  </main>
+    <header class="hero">
+        <div class="hero-content">
+            <h1>Rally Your Crew for Cleaner Shores</h1>
+            <p>Join the movement. Track weather. Make an impact.</p>
+            <div class="cta-buttons">
+                <button class="primary-btn">Start a Cleanup</button>
+                <button class="secondary-btn">Join Existing</button>
+            </div>
+        </div>
+        <div class="wave-animation"></div>
+    </header>
 
-  <footer>
-    <p>&copy; 2025 <strong>404Fixers</strong>. We fix what others fear.</p>
-  </footer>
+    <main>
+        <section id="map" class="map-section">
+            <h2>Find Nearby Cleanups</h2>
+            <div class="map-container">
+                <div id="cleanup-map"></div>
+                <div class="weather-overlay">
+                    <h3>Current Beach Conditions</h3>
+                    <div id="weather-data"></div>
+                </div>
+            </div>
+        </section>
+
+        <section id="community" class="impact-section">
+            <h2>Our Impact</h2>
+            <div class="impact-stats">
+                <div class="stat-card">
+                    <h3>Beaches Cleaned</h3>
+                    <p class="stat-number">124</p>
+                </div>
+                <div class="stat-card">
+                    <h3>Squad Members</h3>
+                    <p class="stat-number">1.2k</p>
+                </div>
+                <div class="stat-card">
+                    <h3>Trash Collected</h3>
+                    <p class="stat-number">4.5t</p>
+                </div>
+            </div>
+        </section>
+
+        <section class="upcoming-events">
+            <h2>Upcoming Squad Missions</h2>
+            <div class="events-grid" id="events-container">
+                <!-- Events will be populated by JavaScript -->
+            </div>
+        </section>
+    </main>
+
+    <footer>
+        <div class="footer-content">
+            <div class="footer-section">
+                <h3>ShoreSquad</h3>
+                <p>Making beach cleanups fun, easy, and connected.</p>
+            </div>
+            <div class="footer-section">
+                <h3>Quick Links</h3>
+                <ul>
+                    <li><a href="#about">About Us</a></li>
+                    <li><a href="#impact">Impact</a></li>
+                    <li><a href="#contact">Contact</a></li>
+                </ul>
+            </div>
+            <div class="footer-section">
+                <h3>Connect</h3>
+                <div class="social-links">
+                    <a href="#" class="social-icon">Instagram</a>
+                    <a href="#" class="social-icon">Twitter</a>
+                    <a href="#" class="social-icon">Facebook</a>
+                </div>
+            </div>
+        </div>
+        <div class="footer-bottom">
+            <p>&copy; 2025 ShoreSquad. All rights reserved.</p>
+        </div>
+    </footer>
+
+    <script src="/js/app.js" defer></script>
 </body>
 </html>
