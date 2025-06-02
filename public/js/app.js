@@ -82,6 +82,69 @@ function joinCleanup(eventTitle) {
     alert('Thanks for joining! Check your email for details.');
 }
 
+// Join Squad Modal Functionality
+function setupJoinModal() {
+    const joinBtn = document.querySelector('.join-btn');
+    const modal = document.createElement('div');
+    modal.className = 'modal';
+    modal.innerHTML = `
+        <div class="modal-content">
+            <span class="close">&times;</span>
+            <h2>Join ShoreSquad</h2>
+            <form id="joinForm">
+                <div class="form-group">
+                    <input type="text" placeholder="Name" required>
+                </div>
+                <div class="form-group">
+                    <input type="email" placeholder="Email" required>
+                </div>
+                <div class="form-group">
+                    <select required>
+                        <option value="">Select your area</option>
+                        <option value="east">East Coast</option>
+                        <option value="west">West Coast</option>
+                        <option value="north">North Coast</option>
+                        <option value="south">South Coast</option>
+                    </select>
+                </div>
+                <button type="submit" class="primary-btn">Join Now</button>
+            </form>
+        </div>
+    `;
+    document.body.appendChild(modal);
+
+    // Modal controls
+    joinBtn.addEventListener('click', () => modal.style.display = 'block');
+    modal.querySelector('.close').addEventListener('click', () => modal.style.display = 'none');
+    window.addEventListener('click', (e) => {
+        if (e.target === modal) modal.style.display = 'none';
+    });
+
+    // Form submission
+    modal.querySelector('#joinForm').addEventListener('submit', (e) => {
+        e.preventDefault();
+        // Add form submission logic here
+        modal.style.display = 'none';
+        showNotification('Welcome to ShoreSquad! Check your email for next steps.');
+    });
+}
+
+// Notification System
+function showNotification(message) {
+    const notification = document.createElement('div');
+    notification.className = 'notification';
+    notification.textContent = message;
+    document.body.appendChild(notification);
+    
+    setTimeout(() => {
+        notification.classList.add('show');
+        setTimeout(() => {
+            notification.classList.remove('show');
+            setTimeout(() => notification.remove(), 300);
+        }, 3000);
+    }, 100);
+}
+
 // Animation for statistics
 function animateStats() {
     const stats = document.querySelectorAll('.stat-number');
@@ -97,11 +160,41 @@ function animateStats() {
     stats.forEach(stat => observer.observe(stat));
 }
 
+// Enhance initMap with clustering
+function enhanceMap() {
+    if (typeof google === 'undefined') return;
+    
+    const markerClusterer = new MarkerClusterer(map, markers, {
+        imagePath: 'https://developers.google.com/maps/documentation/javascript/examples/markerclusterer/m'
+    });
+
+    // Add location search
+    const input = document.createElement('input');
+    input.className = 'map-search';
+    input.placeholder = 'Search location...';
+    map.controls[google.maps.ControlPosition.TOP_LEFT].push(input);
+
+    const searchBox = new google.maps.places.SearchBox(input);
+    searchBox.addListener('places_changed', () => {
+        const places = searchBox.getPlaces();
+        if (places.length === 0) return;
+        
+        const bounds = new google.maps.LatLngBounds();
+        places.forEach(place => {
+            if (!place.geometry) return;
+            bounds.extend(place.geometry.location);
+        });
+        map.fitBounds(bounds);
+    });
+}
+
 // Initialize components
 document.addEventListener('DOMContentLoaded', () => {
     initMap();
     fetchWeatherData();
     animateStats();
+    setupJoinModal();
+    enhanceMap();
 
     // Update weather every 30 minutes
     setInterval(fetchWeatherData, 1800000);
